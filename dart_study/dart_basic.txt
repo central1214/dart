@@ -1,0 +1,242 @@
+int name? = '정훈' // name 변수에 null값이 들어갈 수 있다.
+print(name!) // name 변수는 null값이 안 들어간다
+
+final String name = "정훈"
+name = "임정훈" // final을 쓰면 변수값 변경 가능
+const도 비슷한 기능
+
+final name = "정훈" final과 const를 쓰면 var생략 가능
+
+final과 const의 차이?
+
+DateTime으로 확인 가능 // 
+final DateTime = DateTime.now(); // DateTime.now() - 현재 시간(정확히는 빌드타임) 
+print(DateTime); // 빌드된 타임이 정상적으로 출력된다
+const DateTime2 = DateTime.now(); // 오류 
+//const는 코드가 실행되는 순간에 const 변수의 값을 알아야 한다 - DateTime.now()같은 경우 빌드되는 타임에 변수가 정해져 찍히므로 오류가 나는 것! final은 노상관
+
+//------------------------------------------------------------------
+//operator
+double? number = 4.0;
+number = null;
+number ??= 3.0; // number가 null값이면 3.0으로 바꿔라~
+
+print(number1 is int); // number1가 int Type인지?
+print(number1 is! int); // 아닌지?
+
+//---------------------------------------------------
+//List - 여러개의 값들을 저장하는 것
+  
+  List<String> blackPink = ['제니', '지수', '로제', '리사'];
+  List<int> numbers = [1, 2, 3, 4, 5];
+
+
+  
+  print(blackPink);
+  print(numbers);
+
+//Map - key와 value를 짝으로 가지는 것
+  
+  Map<String, String> dictionary = {
+    'Harry Potter' : '해리포터',
+    'Ron Weasley' : '롤 위즐리',
+  };
+  
+  print(dictionary);
+  Map<String, bool> isHarry = {
+    'Harry Potter': true,
+    'Lim jung hoon': false,
+  };
+  print(isHarry);
+  isHarry.addAll({
+    'Ezreal': false,
+  });
+  
+  print(isHarry['Lim jung hoon']); //key에 해당하는 value값을 가져오는 것
+  
+  isHarry['Dad'] = false;
+  isHarry['Lim jung hoon'] = true;
+  
+  print(isHarry);
+  
+  isHarry.remove('Harry Potter');
+  
+  print(isHarry);
+  
+  print(isHarry.keys);
+  print(isHarry.values);
+
+//출력값
+/*
+{Harry Potter: 해리포터, Ron Weasley: 롤 위즐리}
+{Harry Potter: true, Lim jung hoon: false}
+false
+{Harry Potter: true, Lim jung hoon: true, Ezreal: false, Dad: false}
+{Lim jung hoon: true, Ezreal: false, Dad: false}
+(Lim jung hoon, Ezreal, Dad)
+(true, false, false)*/
+
+
+//Set - List와 유사 (Set은 중복이 안됨)
+ Set<String> names = {
+    'Lim jung hoon',
+    'Lim Tae Wook',
+    'jenny',
+    'jenny',
+    'jenny',
+  };
+  
+  print(names);
+
+//출력
+{Lim jung hoon, Lim Tae Wook, jenny}
+
+//dart는 ifelse문 else if(){}로~
+
+//switch
+  int number = 1;
+  switch(number % 3){
+    case 0:
+      print('나머지 0');
+      break;
+    case 1:
+      print('나머지1');
+      break;
+    case 2:
+      print('나머지2');
+      break;
+     
+  }
+// for loop
+
+  int total = 0;
+  
+  List<int> numbers = [1, 2, 3, 4, 5, 6];
+  
+  for(int i = 0; i < numbers.length; i++){
+    total += numbers[i];
+  }
+  print(total);
+  
+  total = 0;
+  
+  // 위와 같은 패턴을 너무 많이 써서 생긴 문법
+  for(int number in numbers){
+    total += number;
+  }// 위 for문과 같은 결과
+  
+// break와 continue
+for(int i = 0; i < 10; i++){
+    if(i == 5){
+      continue; // break는 loop전체를 종료, continue는 현재 loop을 종료하고 넘어가~
+    }
+    print(i);
+  }
+//출력
+/*0
+1
+2
+3
+4
+6
+7
+8
+9*/
+
+//enum
+//잘 정리된  사이트 (https://limkydev.tistory.com/50)
+
+void main() {
+  addNumbers(2, 5, 10);
+  addNumbers2(2, 3);
+  addNumbers3(x : 10, y: 30, z: 30);
+}
+
+// 세개의 숫자 (x, y, z)를 더하고 짝수인지 홀수인지 알려주는 함수
+// parameter / argument - 매개변수
+// positional parameter - 순서가 중요한 파라미터
+
+addNumbers(int x, int y, int z) {
+  int sum = x + y + z;
+
+  print('x = $x');
+  print('y = $y');
+  print('z = $z');
+
+  if (sum % 2 == 0) {
+    print('짝수입니다');
+  } else {
+    print('홀수입니다');
+  }
+ 
+}
+
+// optional parameter - 있어도 되고~ 없어도 되는~ 파라미터
+addNumbers2(int x, [int y = 10, int z = 20]) {
+  int sum = x + y + z;
+
+  print('x = $x');
+  print('y = $y');
+  print('z = $z');
+
+  if (sum % 2 == 0) {
+    print('짝수입니다');
+  } else {
+    print('홀수입니다');
+  }
+}
+// named parameter - 이름이 있는 파라미터(순서가 중요하지 않다)
+addNumbers3({
+  required int x,
+  required int y,
+  required int z
+}) {
+  int sum = x + y + z;
+
+  print('x = $x');
+  print('y = $y');
+  print('z = $z');
+
+  if (sum % 2 == 0) {
+    print('짝수입니다');
+  } else {
+    print('홀수입니다');
+  }
+}
+// named parameter 에서 optional 하게 쓰려면?
+// required를 지우면 같다~ 
+addNumbers4({
+  required int x,
+  required int y,
+  int z = 0
+}) {
+  int sum = x + y + z;
+
+  print('x = $x');
+  print('y = $y');
+  print('z = $z');
+
+  if (sum % 2 == 0) {
+    print('짝수입니다');
+  } else {
+    print('홀수입니다');
+  }
+}
+// arrow function - 화살표 함수
+int addNumbers(int x, int y, int z) => x + y + z;
+
+//typedef 
+
+void main() {
+   int result = calculate(10, 20, 30, substract);
+  print(result);
+}
+
+typedef Operation = int Function(int x, int y, int z);
+
+// 더하기
+int add(int x, int y, int z) => x + y + z;
+// 빼기
+int substract(int x, int y, int z) => x - y - z;
+// 계산
+int calculate(int x, int y, int z, Operation operation) => operation(x, y, z);
